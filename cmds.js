@@ -157,7 +157,7 @@ exports.testCmd = (rl, id) => {
     } else {
         try {
             const quiz = model.getByIndex(id);
-            rl.question(`${colorize(quiz.question,"magenta")}? : `,answer=>{
+            rl.question(`${colorize(quiz.question + "?","magenta")} : `,answer=>{
                 if((answer || "").toLowerCase().trim() === quiz.answer.toLowerCase()){
                     biglog("CORRECTO","green");
                 }else{
@@ -172,7 +172,6 @@ exports.testCmd = (rl, id) => {
 }
 };
 
-
 /**
  * Pregunta todos los quizzes existentes en el modelo en orden aleatorio.
  * Se gana si se contesta a todos satisfactoriamente.
@@ -186,29 +185,45 @@ exports.playCmd = rl => {
     for(i;i<model.count();i++){
         //Metemos los id's a preguntar en el array
          toBeResolved[i] = i;
-    }
+    } //log(`${toBeResolved}`)
+    
+    const playOne = () =>{
     if(toBeResolved.length===0){
-        log(`${log("Enhorabuena, has terminado el juego\n","green")}
-        Número de aciertos: ${biglog(score,"magenta")}`);
+        log("Enhorabuena, has terminado el juego\n","green");
+        log(`Número de aciertos: `);
+        biglog(score,"magenta");
         rl.prompt();
     }else{
         try {
             let id = Math.round(Math.random()*(model.count()-1));
-        toBeResolved.splice(id,1);
+            if (toBeResolved.includes(id)){
+                 toBeResolved.splice(toBeResolved.indexOf(id),1);
         let quiz = model.getByIndex(id);
-        rl.question(`${colorize(quiz.question,"magenta")}? : `, answer => {
+        rl.question(`${colorize(quiz.question + "?","magenta")} : `, answer => {
             if((answer || "").toLowerCase().trim() === quiz.answer.toLowerCase()){
                 log("CORRECTO","green");
+                log(`Número de aciertos: ${++score}`);
+                playOne();
             }else{
                 log("INCORRECTO","red");
+                log("Número de aciertos: ");
+                biglog(score,"red");
             }
         rl.prompt();
-    });
+    }); 
+}else{
+    playOne();
+}
         } catch (error) {
             rl.prompt();
-        }
-    
-};
+        }  
+    }
+           
+         
+            }
+    playOne();
+        
+    };
 
 
 /**
@@ -231,5 +246,3 @@ exports.creditsCmd = rl => {
 exports.quitCmd = rl => {
     rl.close();
 };
-
-}
