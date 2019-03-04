@@ -206,7 +206,7 @@ exports.playCmd = rl => {
                 playOne();
             }else{
                 log("INCORRECTO","red");
-                log("Número de aciertos: ");
+                log("Fin del juego. Número de aciertos: ");
                 biglog(score,"red");
             }
         rl.prompt();
