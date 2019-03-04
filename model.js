@@ -41,7 +41,7 @@ let quizzes = [
  *  Este método carga el contenido del fichero DB_FILENAME en la variable
  *  quizzes. El contenido de ese fichero está en formato JSON.
  *  La primera vez que se ejecute este método, el fichero DB_FILENAME no
- *  existe, y se producirá el errro ENOENT. En este caso se salva el
+ *  existe, y se producirá el error ENOENT. En este caso se salva el
  *  contenido inicial almacenado en quizzes.
  *  Si se produce otro tipo de error, se lanza una excepción que abortará
  *  la ejecución del programa.

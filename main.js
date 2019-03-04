@@ -4,7 +4,6 @@ const {log, biglog, errorlog, colorize} = require("./out");
 
 const cmds = require("./cmds");
 
-
 // Mensaje inicial
 biglog('CORE Quiz', 'green');
 

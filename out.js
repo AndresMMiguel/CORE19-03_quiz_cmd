@@ -5,7 +5,7 @@ const chalk = require('chalk');
 /**
  * Dar color a un string.
  *
- * @param msg    Es string al que hay que dar color.
+ * @param msg    El string al que hay que dar color.
  * @param color  El color con el que pintar msg.
  * @returns {string} Devuelve el string msg con el color indicado.
  */
